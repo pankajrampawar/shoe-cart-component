@@ -1,13 +1,56 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+
+.swipes {
+    background-color: white;
+    padding: 10px;
+    cursor: pointer;
+    position: fixed;
+    transform: translateY(-50%);
+    z-index: 1;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.kumbhS {
+    font-family: 'Kumbh Sans';
+    font-weight: 400;
+}
+
+.kumbhB {
+    font-family: 'kumbh Sans';
+    font-weight: 700;
+}
+
+.parent {
+    overflow: hidden;
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+}
+
+.imageStyling {
+    height: 100%;
+    vertical-align: middle;
+}
+
+.childDiv{ 
+    display: inline-block;
+    width: 100%;
+    scroll-snap-align: start;
+}
+
+
+.overlay {
+    background-color: hsla(0, 0%, 50%, 0.5);
+
+}
+
+.overlayD {
+    background-color: hsla(0, 0%, 9%, 0.7);
+}
+
+.icon:hover {
+    filter: invert(94%) sepia(61%) saturate(1500%) hue-rotate(330deg) brightness(102%) contrast(101%);
 }
