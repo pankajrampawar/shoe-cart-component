@@ -15,7 +15,7 @@ const CartConent = (prop)=>{
               <p className='flex flex-col'>Fall Limited Edition Sneakers
                 <span>$125.00 x {prop.count} <span className='kumbhB text-black'> ${' ' + 125*prop.count}</span></span>
               </p>
-              <span onClick={prop.clearCart}><img src='/images/icon-delete.svg' alt='delete icon'/></span>
+              <span onClick={prop.clearCart} className='cursor-pointer'><img src='/images/icon-delete.svg' alt='delete icon'/></span>
             </div>
           </div>
           <button className='p-3 bg-O text-lg text-white rounded-xl kumbhS'>Checkout</button>
