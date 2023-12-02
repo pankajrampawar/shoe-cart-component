@@ -5,7 +5,7 @@ const CartConent = (prop)=>{
   return (
     <div className='absolute top-20 z-10 left-0 right-0 m-auto w-11/12 rounded-xl bg-white sm:left-auto sm:right-0 sm:w-auto shadow-2xl'>
       <div className='text-2xl kumbhS p-5 border-b'>Cart</div>
-      {prop.count === 0 ? 
+      {(prop.addedToCart === false)? 
         <div className='sm:min-w-[394px] sm:min-h-[168px] grid place-content-center kumbhS text-GB text-xl'>No items in the cart</div> 
         :
         <div className='flex flex-col gap-3 p-5 sm:min-w-[394px] sm:min-h-[168px]'>
@@ -78,6 +78,7 @@ export default function App() {
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isCartOpen, setIsCartOpen] = React.useState(false);
+  const [addedToCart, setAddedToCart] = React.useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = React.useState(false);
   const [focusedIndex, setFocusedIndex] = React.useState(0);
   const [itemsInCart, setItmesInCart] = React.useState(0);
@@ -106,10 +107,9 @@ export default function App() {
     if(operation === '-') {
       setItmesInCart(prev => {
         if(prev > 0) {
+          if(prev === 1) {setAddedToCart(false)}
           return prev - 1;
-        } else {
-          return 0;
-        }
+        } 
       })
     } else if(operation === '+') {
       setItmesInCart(prev => prev+1)
@@ -140,17 +140,22 @@ export default function App() {
             <img src="/images/icon-menu.svg" alt='logo' className='pt-1 sm:hidden' onClick={()=>{toggle('menu')}}/>
             <img src='/images/logo.svg' alt="logo" />
             <ul className='hidden sm:flex gap-2 md:gap-5 text-DGB kumbhS sm:relative'>
-              <li className='cursor-pointer hover:text-VDB'>Collections</li>
-              <li className='cursor-pointer hover:text-VDB'>Men</li>
-              <li className='cursor-pointer hover:text-VDB'>Women</li>
-              <li className='cursor-pointer hover:text-VDB'>About</li>
-              <li className='cursor-pointer hover:text-VDB'>Contact</li>
+              <li className='cursor-pointer hover:text-VDB relative link'>Collections</li>
+              <li className='cursor-pointer hover:text-VDB relative link'>Men</li>
+              <li className='cursor-pointer hover:text-VDB relative link'>Women</li>
+              <li className='cursor-pointer hover:text-VDB relative link'>About</li>
+              <li className='cursor-pointer hover:text-VDB relative link'>Contact</li>
             </ul>
           </div>
           <div className='flex items-center gap-2 sm:gap-4 sm:relative'>
-            <img src='/images/icon-cart.svg' alt='cart icon' onClick={()=>{toggle('cart')}} className='cursor-pointer'/>
+            <div className='relative'>
+              <span className={`absolute -top-3 -right-3 rounded-xl bg-O px-2 text-[12px] text-bold text-white ${addedToCart && itemsInCart > 0 ? '' : 'hidden'}`}>
+                {itemsInCart}
+              </span>
+              <img src='/images/icon-cart.svg' alt='cart icon' onClick={()=>{toggle('cart')}} className='cursor-pointer'/>
+            </div>
             <img src='/images/image-avatar.png' alt='user avatar' className='w-8 hover:border rounded-full border-O sm:w-12 cursor-pointer hover:broder-4 hover:border-O'/>
-            {isCartOpen && <CartConent count={itemsInCart} clearCart={()=>{setItmesInCart(0)}}/>}
+            {isCartOpen && <CartConent count={itemsInCart} clearCart={()=>{setItmesInCart(0); setAddedToCart(false)}} addedToCart={addedToCart}/>}
           </div>
         </nav>
         {isMenuOpen && <div className='absolute top-0 h-screen w-screen z-10 overlay'>
@@ -233,7 +238,7 @@ export default function App() {
                 {itemsInCart} 
                 <img src='/images/icon-minus.svg' alt='reduce shoes button' className='cursor-pointer hover:opacity-50' onClick={()=>{cartEdit('-')}}/>
               </button>
-              <button className='flex justify-center gap-2 text-white bg-O hover:bg-orange-400 p-4 items-center rounded-2xl shadow-2xl shadow-O lg:w-64 lg:shadow-Op'><img src='/images/icon-cart.svg' alt='cart icon' className='grayscale invert brightness-0'/>Add to cart</button>
+              <button className='flex justify-center gap-2 text-white bg-O hover:bg-orange-400 p-4 items-center rounded-2xl shadow-2xl shadow-O lg:w-64 lg:shadow-Op' onClick={()=>{ if(itemsInCart > -0)setAddedToCart(true)}}><img src='/images/icon-cart.svg' alt='cart icon' className='grayscale invert brightness-0'/>Add to cart</button>
             </div>
           </div>
 

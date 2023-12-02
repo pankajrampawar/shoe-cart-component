@@ -9,7 +9,6 @@ This is a solution to the [E-commerce product page challenge on Frontend Mentor]
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
-  - [Continued development](#continued-development)
 - [Author](#author)
 
 ## Overview
@@ -38,10 +37,6 @@ Users should be able to:
 - CSS custom properties
 - Flexbox
 - [React](https://reactjs.org/) - JS library
-
-### Continued development
-
-I had some relative issues wiht the border styling of li on nav header so left it with some changes, weill improve upon that aspect.
 
 ## Author
 
